@@ -7,10 +7,10 @@ const authorization = require('../middleware/auth');
 
 const router = express.Router();
 
-router.get('/songs', authorization, getAllSongs);
+router.get('/songs', getAllSongs);
 router.get('/song/:id', getSongById);
-router.post('/song', validate, createSong);
-router.put('/song/:id', validate, updateSong);
-router.delete('/song/:id', deleteSong);
+router.post('/song', authorization, validate, createSong);
+router.put('/song/:id', authorization, validate, updateSong);
+router.delete('/song/:id', authorization, deleteSong);
 
 module.exports = router;
