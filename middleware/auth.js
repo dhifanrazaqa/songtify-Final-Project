@@ -11,13 +11,13 @@ const authorization = (req, res, next) => {
     const token = req.headers.authorization.split(' ')[1];
 
     jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
-      if (error) return res.status(401).json({ message: 'Unauthorized' });
-
+      if (error) {
+        throw Error();
+      }
       req.user = decoded;
     });
 
     console.log(req.user);
-
     return next();
   } catch (error) {
     return res.status(401).json({ message: 'Unauthorized' });
